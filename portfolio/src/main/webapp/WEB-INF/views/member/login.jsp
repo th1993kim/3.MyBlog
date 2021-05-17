@@ -13,8 +13,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="main-container">
-
+	<div class="login-container">
+		<form id="loginForm" action="${contextPath}/member/login" method="post">
+			<div class="id-container">
+				ID : <input type="text" name="member_id" class="inText id" placeholder="아이디를 입력하세요" />
+			</div>
+			<div class="pwd-container">
+				PWD :<input type="text" name="member_pwd" class="inText pwd" placeholder="비밀번호를 입력하세요" />
+			</div>
+			<div class="login-button">
+				<input type="submit" value="로그인" name="login" class=""/>			
+			</div>
+		</form>
 	</div>
 </body>
 </html>
