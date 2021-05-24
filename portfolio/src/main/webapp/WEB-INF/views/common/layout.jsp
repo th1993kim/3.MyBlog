@@ -13,6 +13,12 @@
 <%--  tiels관련xml문서에서 정의한 
        <put-attribute name="title"	value="~~~~" />을 적용하는 부분  --%>
 <title><tiles:insertAttribute name="title" /></title>
+<style>
+#wrap>article{
+	width:1180px;
+	margin:0 auto;
+}
+</style>
 </head>
 <body>
 <div id="outer_wrap">

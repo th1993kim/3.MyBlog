@@ -22,21 +22,33 @@
 	</beans:bean> -->
 	
 	<!-- tiles 적용시작  -->
-	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-   		<beans:property name="definitions">
+	<!-- tiles에서 preparer로 사용하기 위한 클래스를 bean등록
+			preparerFactoryClass가  SpringBeanPreparerFactory인경우 bean을 등록해야하며 
+			SimpleSpringPreparerFactory 인경우 bean등록없이 teils.xml에 
+			preparer="com.test.common.MenuPreparer" 와 같이 사용가능 하다.
+	 -->
+	<beans:bean id="category" class="com.myportfolio.mypage.common.controller.CategoryController" />
+	
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+   		<beans:property name="definitions"> 
     	  	<beans:list>
        		 	 <beans:value>classpath:tiles/*.xml</beans:value>
      		</beans:list>
    		</beans:property>
-   		<beans:property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory"/>
+   			<!-- tiles 동적 처리를 위한 property -->
+   		<beans:property name="preparerFactoryClass" value="org.springframework.web.servlet.view.tiles3.SpringBeanPreparerFactory"/>
 	</beans:bean>
 	
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver"> 
-	   	<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/> 
+	   	<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/> 
 	</beans:bean>
-	
 	<context:component-scan base-package="com.myportfolio.mypage" />
 	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    	<beans:property name="maxUploadSize" value="200000000" />
+    	<beans:property name="maxInMemorySize" value="200000000" />
+	</beans:bean>
+
 	
 	
 </beans:beans>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<!-- study 글목록 가져오기 -->
+	<mapper namespace="study">
+		<select id="studyListSelect" resultType="studyDTO" parameterType="searchDTO">
+			SELECT *
+			FROM
+			(SELECT *
+			FROM study
+			<where>
+				<if test="so_no !=0 and so_no !=null">so_no=#{so_no}</if>
+				<if test="dae_no !=0 and dae_no !=null">and dae_no=#{dae_no}</if>
+				<if test="search_title!=null">
+					<!-- AND study_title like CONCAT('%',#{search_title},'%')  mysql-->
+					AND study_title like '%'||#{search_title}||'%'
+				</if>
+			</where> 
+			ORDER BY study_date
+			)WHERE rownum between #{startNum} AND #{endNum}
+		</select>
+		
+		<!-- study 의 제목 , 날짜 등 기본정보 입력  -->
+		<insert id="studyWrite" parameterType="studyDTO">
+			INSERT INTO study(study_no,study_title,member_id,study_date,study_delete,so_no,dae_no)
+			VALUES	(seq_study.nextval,#{study_title},#{member_id},sysdate,0,${so_no},${dae_no})
+		</insert>
+		
+		<!-- contentList 입력  -->
+		<insert id="scontentWrite" parameterType="scontentDTO">
+			<selectKey keyProperty="study_no" resultType="int" order="BEFORE">
+				SELECT seq_study.currval 
+				FROM dual
+			</selectKey>
+			INSERT INTO scontent(scontent_no,scontent_content,scontent_color,scontent_size,scontent_weight,study_no,scontent_order_no)
+			VALUES(seq_scontent.nextval,#{scontent_content},#{scontent_color},#{scontent_size},#{scontent_weight},#{study_no},#{scontent_order_no})
+		</insert>
+		
+		<!-- study_no만 가져오기  -->
+		<select id="study_no" resultType="int">
+			SELECT seq_study.currval 
+			FROM dual
+		</select>
+		
+		<!-- simgList입력 -->
+		<insert id="simgWrite" parameterType="simgDTO">
+			INSERT INTO simg(simg_no,simg_name,simg_width,simg_height,study_no,simg_order_no)
+			VALUES(seq_simg.nextval,#{simg_name},#{simg_width},#{simg_height},#{study_no},#{simg_order_no})
+		</insert>
+		
+		<!-- study한개 가져오기  -->
+		<select id="studySelect" resultType="studyDTO" parameterType="int">
+			SELECT *
+			FROM study
+			WHERE study_no=#{study_no}
+		</select>
+		
+		<!-- scontentList 가져오기 -->
+		<select id="scontentListSelect" resultType="scontentDTO" parameterType="int">
+			SELECT *
+			FROM scontent
+			WHERE study_no = #{study_no}
+		</select>
+		
+		<!-- simgList가져오기 -->
+		<select id="simgListSelect" resultType="simgDTO" parameterType="int">
+			SELECT *
+			FROM simg
+			WHERE study_no=#{study_no}			
+		</select>
+		
+		<!-- scontent 순서 max값 가져오기 -->
+		<select id="scontentMaxOrder" resultType="int" parameterType="int">
+			SELECT max(scontent_order_no)
+			FROM scontent
+			WHERE study_no=#{study_no}
+		</select>
+		
+		<!--simg 순서 max값 가져오기  -->
+		<select id="simgMaxOrder" resultType="int" parameterType="int">
+			SELECT nvl(max(simg_order_no),0)
+			FROM simg
+			WHERE study_no=#{study_no}
+		</select>
+		
+		<!-- study 글 수정 -->
+		<update id="studyModify" parameterType="studyDTO">
+			UPDATE study
+			SET study_title=#{study_title}
+			WHERE study_no=#{study_no}
+		</update> 
+		
+		<!-- scontent삭제  -->
+		<delete id="scontentDelete" parameterType="int">
+			DELETE FROM scontent
+			WHERE study_no=#{study_no}
+		</delete>
+		
+		<!-- contentList 수정입력  -->
+		<insert id="scontentModify" parameterType="scontentDTO">
+			INSERT INTO scontent(scontent_no,scontent_content,scontent_color,scontent_size,scontent_weight,study_no,scontent_order_no)
+			VALUES(seq_scontent.nextval,#{scontent_content},#{scontent_color},#{scontent_size},#{scontent_weight},#{study_no},#{scontent_order_no})
+		</insert>
+		
+		<!-- 삭제할 simg 정보 가져오기 -->
+		<select id="simgSelect" resultType="simgDTO" parameterType="int">
+			SELECT *
+			FROM simg
+			WHERE simg_no=#{simg_no}
+		</select>
+		
+		<!--simg 삭제 -->
+		<delete id="simgDelete" parameterType="int">
+			DELETE FROM simg
+			WHERE simg_no=#{simg_no}		
+		</delete>
+		
+		<!-- 수정파일 순서 다시 정해줌 -->
+		<update id="simgOrder" parameterType="map">
+			UPDATE simg
+			SET simg_order_no=#{simg_order_no} 
+			WHERE simg_no=${simg_no}
+		</update>
+		
+		
+	</mapper>
