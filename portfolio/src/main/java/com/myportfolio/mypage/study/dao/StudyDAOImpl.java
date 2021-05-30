@@ -11,7 +11,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myportfolio.mypage.common.dto.PageDTO;
 import com.myportfolio.mypage.common.dto.SearchDTO;
+import com.myportfolio.mypage.common.util.FileUtilPro;
 import com.myportfolio.mypage.study.dto.ScontentDTO;
 import com.myportfolio.mypage.study.dto.SimgDTO;
 import com.myportfolio.mypage.study.dto.StudyDTO;
@@ -50,45 +52,8 @@ public class StudyDAOImpl implements StudyDAO {
 	public void simgWrite(List<SimgDTO> simgList, List<MultipartFile> files) throws DataAccessException {
 		int study_no = (Integer)sqlSession.selectOne("study.study_no");
 		String fileDirPath = RealPath+"\\"+study_no; //실제 저장 물리 경로 (study_no로 폴더 분류)
-		
-		File fileDir = new File(fileDirPath); //폴더 생성
-		if(!fileDir.exists()) {
-			try {
-				fileDir.mkdirs(); //mkdir 상위폴더 없을 경우 생성 X mkdirs 상위폴더까지 생성
-			}catch(Exception e) {
-				e.getStackTrace();
-			}		
-		}
-		int k=0;
-		
-		for(int i=0;i<files.size();i++) {
-			MultipartFile file = files.get(i); //file과 simgDTO는 1:1 맵핑된다.
-			SimgDTO simg=null;
-			while(true) {
-				if(simgList.get(k).getIs_upload()==1) {
-					simg = simgList.get(k);
-					k++;
-					break;
-				}
-				k++;
-			}
-			
-			if(!file.isEmpty()) {
-				String imgSavingName = System.currentTimeMillis()+i+file.getOriginalFilename();
-				String saveFile = fileDirPath+"\\"+imgSavingName;
-				try {
-					file.transferTo(new File(saveFile)); //파일 생성
-					String simg_name = DBPath +study_no+"/"+imgSavingName; //파일 생성이 되었을시 DB저장명
-					simg.setSimg_name(simg_name);
-					simg.setStudy_no(study_no);
-					sqlSession.insert("study.simgWrite",simg);
-				}catch (Exception e) {
-					e.printStackTrace();
-				}				
-			}
-		}
-		
-		
+		FileUtilPro.makeFolder(new File(fileDirPath)); //디렉토리 생성
+		studyImgUpload(study_no, files, simgList, fileDirPath); //파일 업로드
 	}
 
 	//선택한 study 가져오기
@@ -145,22 +110,9 @@ public class StudyDAOImpl implements StudyDAO {
 	public void simgDelete(int[] deleteFile,int study_no) throws DataAccessException {
 		if(deleteFile!=null) {
 			for(int deleteImg : deleteFile) {
-				SimgDTO simg = (SimgDTO)sqlSession.selectOne("study.simgSelect",deleteImg);
-				String dbPath = simg.getSimg_name();
-				String[] dbPathSplit = dbPath.split("/"); //split에 뒤에 인자에 -1넣으면 공백도 인식
-				String realPath =RealPath +"\\"+dbPathSplit[1]+"\\"+dbPathSplit[2];
-				
-				
-				File delfile = new File(realPath);
-				if(delfile.exists()) {
-					try{
-						delfile.delete();
-						sqlSession.delete("study.simgDelete",simg);
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				
+				String realPath = getSavedPath(deleteImg); //실제 물리 경로 찾아오기
+				FileUtilPro.deleteFile(new File(realPath)); //파일 삭제
+				sqlSession.delete("study.simgDelete",deleteImg);
 			}
 		}
 		
@@ -173,30 +125,18 @@ public class StudyDAOImpl implements StudyDAO {
 			
 		//수정파일 일단 삭제
 		if(modifyFile!=null) {
-			for(int deleteImg :modifyFile) {
-				SimgDTO simg = (SimgDTO)sqlSession.selectOne("study.simgSelect",deleteImg);
-				String dbPath = simg.getSimg_name();
-				String[] dbPathSplit = dbPath.split("/"); //split에 뒤에 인자에 -1넣으면 공백도 인식
-				String realPath =RealPath +"\\"+dbPathSplit[2]+"\\"+dbPathSplit[3];
-				File delfile = new File(realPath);
-				if(delfile.exists()) {
-					try{
-						delfile.delete();
-						sqlSession.delete("study.simgDelete",deleteImg);
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
+			for(int modifyImg :modifyFile) {
+				String realPath = getSavedPath(modifyImg); //실제 물리 경로 찾아오기
+				FileUtilPro.deleteFile(new File(realPath)); //파일 삭제
+				sqlSession.delete("study.simgDelete",modifyImg);
 			}
 		}
 		
-		//기존 파일들 순서 다시 정해주기 삭제 후 남은 파일들 순서 재정리 해준다.
+		//기존 파일들 순서 다시 정해주기, 삭제 후 남은 파일들 순서 재정리 해준다.
 		//후에 새로운 파일들은 order_no에 따라 위치가 조정된다.
 		if(reposition!=null) {	
 			for(int i=0;i<repositionValue.length;i++) {
 					Map<String,Object> orderFix = new HashMap<String,Object>();
-					System.out.println("resposition["+i+"] = "+reposition[i] );
-					System.out.println("repositionValue["+i+"] = "+repositionValue[i] );
 					orderFix.put("simg_no",reposition[i]);
 					orderFix.put("simg_order_no",repositionValue[i]);
 					sqlSession.update("study.simgOrder",orderFix);
@@ -204,18 +144,24 @@ public class StudyDAOImpl implements StudyDAO {
 		}
 		
 		//파일 새로이 저장
-		String fileDirPath = RealPath+"\\"+study_no;
-		File fileDir = new File(fileDirPath); 
-		if(!fileDir.exists()) {
-			try {
-				fileDir.mkdirs(); //mkdir 상위폴더 없을 경우 생성 X mkdirs 상위폴더까지 생성
-			}catch(Exception e) {
-				e.getStackTrace();
-			}		
-		}
-		
+		String fileDirPath = RealPath+"\\"+study_no; //디렉토리 경로 설정
+		FileUtilPro.makeFolder(new File(fileDirPath)); //디렉토리 생성
+		studyImgUpload(study_no, files, simgList, fileDirPath); //파일 업로드
+	}
+	
+	
+	//simg의 번호를 통해 실제 저장된 경로를 찾아오는 메서드
+	private String getSavedPath(int deleteFileNo) {
+		SimgDTO simg = (SimgDTO)sqlSession.selectOne("study.simgSelect",deleteFileNo);
+		String dbPath = simg.getSimg_name();
+		String[] dbPathSplit = dbPath.split("/"); //split에 뒤에 인자에 -1넣으면 공백도 인식
+		String realPath =RealPath +"\\"+dbPathSplit[2]+"\\"+dbPathSplit[3];
+		return realPath;
+	}
+	
+	//study 테이블의 파일 저장
+	private void studyImgUpload(int save_no,List<MultipartFile> files,List<SimgDTO> simgList,String fileDirPath) {
 		int k=0;
-		
 		for(int i=0;i<files.size();i++) {
 			MultipartFile file = files.get(i); //file과 simgDTO는 1:1 맵핑된다.
 			SimgDTO simg=null;
@@ -234,20 +180,29 @@ public class StudyDAOImpl implements StudyDAO {
 				String saveFile = fileDirPath+"\\"+imgSavingName;
 				try {
 					file.transferTo(new File(saveFile)); //파일 생성
-					String simg_name = DBPath +study_no+"/"+imgSavingName; //파일 생성이 되었을시 DB저장명
-					simg.setSimg_name(simg_name);
-					simg.setStudy_no(study_no);
+					simg.setSimg_name(DBPath +save_no+"/"+imgSavingName);
+					simg.setStudy_no(save_no);
 					sqlSession.insert("study.simgWrite",simg);
 				}catch (Exception e) {
 					e.printStackTrace();
 				}				
 			}
 		}
-		
-		
-
-		
-		
 	}
+
+	//Dae_no로 So_no 가져오기
+	@Override
+	public int firstSoNum(int i) throws DataAccessException {
+		return sqlSession.selectOne("study.firstSoNum", i);
+	}
+
+	@Override
+	public PageDTO getStudyPage(SearchDTO searchDTO) throws DataAccessException {
+		int total=0;
+		total=sqlSession.selectOne("study.totalNum", searchDTO);
+		PageDTO studyPage = new PageDTO(searchDTO.getCurrentPage(),total,searchDTO.getSeeCount());
+		return studyPage;
+	}
+	
 
 }

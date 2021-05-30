@@ -23,7 +23,9 @@ public class SearchDTO {
 		this.dae_no=0;
 		this.so_no=0;
 		this.search_title="";
-		this.seeCount=20;
+		this.seeCount=2;
+		this.startNum = 1; //시작번호
+		this.endNum = 10;
 	}
 
   

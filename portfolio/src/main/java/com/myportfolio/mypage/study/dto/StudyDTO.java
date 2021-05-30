@@ -17,6 +17,8 @@ public class StudyDTO {
 	private int study_no;
 	private String study_title;
 	private String member_id;
+	private String dae_name;
+	private String so_name;
 	private Date study_date;
 	private int study_delete;
 	private int so_no;

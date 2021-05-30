@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myportfolio.mypage.common.dto.PageDTO;
 import com.myportfolio.mypage.common.dto.SearchDTO;
 import com.myportfolio.mypage.member.dto.MemberDTO;
 import com.myportfolio.mypage.study.dto.ScontentDTO;
@@ -40,12 +41,18 @@ public class StudyControllerImpl implements StudyController {
 			throws Exception {
 		searchDTO.setStartNum((searchDTO.getCurrentPage()-1)*searchDTO.getSeeCount()+1);
 		searchDTO.setEndNum(searchDTO.getStartNum()+searchDTO.getSeeCount()-1);
+		System.out.println(searchDTO.getCurrentPage());
+		System.out.println(searchDTO.getStartNum());
+		System.out.println(searchDTO.getEndNum());
+		
 		List<StudyDTO> studyList = studyService.studyList(searchDTO);
-		 
+		PageDTO studyPage =studyService.getStudyPage(searchDTO); 
 		ModelAndView mv = new ModelAndView("/study/studyList");
+		mv.addObject("studyPage",studyPage);
 		mv.addObject("studyList",studyList);
 		mv.addObject("search",searchDTO);
 		return mv;
+		
 	}
 
 	@RequestMapping(value="/study/studyWriteForm",method=RequestMethod.GET)
@@ -178,6 +185,7 @@ public class StudyControllerImpl implements StudyController {
 		rs=new ResponseEntity(message,headers,HttpStatus.OK);
 		return rs;
 	}
+	
 	
 	
 

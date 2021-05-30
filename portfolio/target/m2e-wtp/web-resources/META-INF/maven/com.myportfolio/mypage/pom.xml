@@ -254,6 +254,17 @@
 			<version>1.16.20</version>
 		</dependency>
 		       
+		<!-- 썸네일 관련 라이브러리 -->
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>       
+		 <dependency>
+			<groupId>com.mortennobel</groupId>
+			<artifactId>java-image-scaling</artifactId>
+			<version>0.8.5</version>
+		</dependency>      
 	</dependencies>
     <build>
         <plugins>

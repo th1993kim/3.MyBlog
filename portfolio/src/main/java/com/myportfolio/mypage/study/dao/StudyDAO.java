@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myportfolio.mypage.common.dto.PageDTO;
 import com.myportfolio.mypage.common.dto.SearchDTO;
 import com.myportfolio.mypage.study.dto.ScontentDTO;
 import com.myportfolio.mypage.study.dto.SimgDTO;
@@ -25,4 +26,6 @@ public interface StudyDAO {
 	public void simgDelete(int[] deleteFile, int study_no) throws DataAccessException;
 	public void simgModify(int[] modifyFile, int[] reposition, int[] repositionValue, List<SimgDTO> simgList,
 			List<MultipartFile> files, int study_no) throws DataAccessException;
+	public int firstSoNum(int i) throws DataAccessException;
+	public PageDTO getStudyPage(SearchDTO searchDTO) throws DataAccessException;
 }

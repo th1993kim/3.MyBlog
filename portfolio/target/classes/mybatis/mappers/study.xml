@@ -7,20 +7,36 @@
 	<mapper namespace="study">
 		<select id="studyListSelect" resultType="studyDTO" parameterType="searchDTO">
 			SELECT *
-			FROM
-			(SELECT *
-			FROM study
-			<where>
-				<if test="so_no !=0 and so_no !=null">so_no=#{so_no}</if>
-				<if test="dae_no !=0 and dae_no !=null">and dae_no=#{dae_no}</if>
+			FROM(
+				SELECT rownum rw,x.*
+				FROM
+					(SELECT s.*,so.so_name,dae.dae_name
+					FROM study s, so,dae 
+					where s.so_no=so.so_no and s.dae_no=dae.dae_no
+				<if test="so_no !=0 and so_no !=null">and s.so_no=#{so_no}</if>
+				<if test="dae_no !=0 and dae_no !=null">and s.dae_no=#{dae_no}</if>
 				<if test="search_title!=null">
 					<!-- AND study_title like CONCAT('%',#{search_title},'%')  mysql-->
+					AND s.study_title like '%'||#{search_title}||'%'
+				</if>
+					ORDER BY s.study_date desc
+					) x
+			)WHERE rw between #{startNum} AND #{endNum}
+		</select>
+		
+		<!-- page처리할 total갯수 가져오기 -->
+		<select id="totalNum" resultType="int" parameterType="searchDTO" >
+			SELECT count(*)			
+			FROM study 
+			<where>
+				<if test="so_no !=0 and so_no !=null"> so_no=#{so_no}</if>
+				<if test="dae_no !=0 and dae_no !=null">and dae_no=#{dae_no}</if>
+				<if test="search_title!=null">
 					AND study_title like '%'||#{search_title}||'%'
 				</if>
-			</where> 
-			ORDER BY study_date
-			)WHERE rownum between #{startNum} AND #{endNum}
+			</where>
 		</select>
+		
 		
 		<!-- study 의 제목 , 날짜 등 기본정보 입력  -->
 		<insert id="studyWrite" parameterType="studyDTO">
@@ -121,8 +137,14 @@
 		<update id="simgOrder" parameterType="map">
 			UPDATE simg
 			SET simg_order_no=#{simg_order_no} 
-			WHERE simg_no=${simg_no}
+			WHERE simg_no=#{simg_no}
 		</update>
 		
+		<!--  -->
+		<select id="firstSoNum" resultType="int" parameterType="int">
+			SELECT so_no
+			FROM so
+			WHERE dae_no=#{dae_no} and rownum=1
+		</select>
 		
 	</mapper>

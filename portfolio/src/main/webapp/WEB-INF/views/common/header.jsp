@@ -14,30 +14,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <style>
 .header-container{
 	max-width:1180px;
 	width:90%;
-	margin: 0 auto;
+	margin: 0 auto 100px auto;
+	display:flex;
+	
 }
-@media screen and (min-width: 768px){
-	.header-container{
-	 display:flex;
-	}
-	.homepage-name{
-		flex-grow: 1;
-	}
-} 
 .hide{
 	display:none;
+} 
+.header-container ul,li{
+ 	list-style: none;
+} 
+.firstUl > li{ 
+  display:inline-block;
+  position:relative;
+  margin: 10px;
+  left:700px;
+  cursor:pointer;
+}
+.firstUl > li:hover{
+	color: skyblue; text-decoration: none;
+}
+.header-container a{
+	color:black;
+} 
+.header-container a:visited { 
+	color: black; text-decoration: none;
+} 
+.header-container a:hover { 
+	color: skyblue; text-decoration: none;
 }
 
+.secondUl{
+	position:absolute;
+	padding:0px; 
+}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 $(function(){
-	$('.menu').click(function(){
+	$('.slidemenu').click(function(){
 		var submenu = $(this).children("ul");
 		if(submenu.is(":visible")){
 			submenu.slideUp();
@@ -52,35 +73,32 @@ $(function(){
 </head>
 <body>
 <div class="header-container">
-	<h1 class="homepage-name">THweb</h1>
-	<ul>
+	<h1 class="homepage-name"><a href="${contextPath}/main">THweb</a></h1>
+	<ul class="firstUl"> 
 		<li>
+			<h3>
 			<c:if test="${empty loginMember}">		
-				<ul>
 					<a href="${contextPath}/member/loginForm">로그인</a>
-				</ul>
 			</c:if>
 			<c:if test="${!empty loginMember}">	
-				<ul>
 					<a href="${contextPath}/member/logout">로그아웃</a> 
-				</ul>
 			</c:if>
+			</h3>
 		</li>
 		<c:forEach items="${daeList}" var="dae" >
-			<li class="menu"><h3>${dae.dae_name}</h3>
-				<c:forEach items="${soList}" var="so" >
-					<c:if test="${so.dae_no==dae.dae_no}">
-						<ul class="study hide">
-							<li>
-								<a href="${contextPath}/study/studyList?dae_no=${so.dae_no}&so_no=${so.so_no}">${so.so_name}</a>
-							</li>
-						</ul>
-					</c:if>
-				</c:forEach>
+			<li class="slidemenu"><h3>${dae.dae_name}</h3>
+				<ul class="study hide secondUl">
+					<c:forEach items="${soList}" var="so" varStatus="i">
+						<c:if test="${so.dae_no==dae.dae_no}">
+						<li>
+							<a href="${contextPath}/study/studyList?dae_no=${so.dae_no}&so_no=${so.so_no}">${so.so_name}</a>
+						</li>
+						</c:if> 
+					</c:forEach>
+				</ul>
 			</li>
 		</c:forEach>	
 	</ul>
-	
 </div>
 </body>
 </html>

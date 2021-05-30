@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myportfolio.mypage.common.dto.PageDTO;
 import com.myportfolio.mypage.common.dto.SearchDTO;
 import com.myportfolio.mypage.study.dao.StudyDAO;
 import com.myportfolio.mypage.study.dto.ScontentDTO;
@@ -79,6 +80,17 @@ public class StudyServiceImpl implements StudyService {
 		studyDAO.simgModify(modifyFile,reposition,repositionValue,simgList,files,study_no);
 		return result;
 	}
+
+	@Override
+	public int firstSoNum(int i) throws Exception {
+		return studyDAO.firstSoNum(i);
+	}
+
+	@Override
+	public PageDTO getStudyPage(SearchDTO searchDTO) throws Exception {
+		return studyDAO.getStudyPage(searchDTO); 
+	}
+
 	
 	
 	
