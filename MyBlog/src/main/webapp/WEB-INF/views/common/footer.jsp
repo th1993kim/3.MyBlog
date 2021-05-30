@@ -34,10 +34,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="footer-container">
+	<div class="footer-container"> 
 		<div class="footer-left">
-			<span>E-mail : th1993kim@gmail.com</span>
-			<br/>
+			<span>E-mail : th1993kim@gmail.com</span> 
+			<br/>  
+			<span><img src="${contextPath}/resources/imgs/GithubIcon.png" style="width:30px;height:30px;" />GitHub : https://github.com/th1993kim/MyProject</span><br/>
 			<span>Copyright ⓒ Tae Hyun Kim</span>
 		</div>
 	</div>
