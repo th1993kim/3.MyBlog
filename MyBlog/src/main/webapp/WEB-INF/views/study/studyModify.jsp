@@ -122,7 +122,7 @@ function reposition(){
 		
 	$('.numChecking').each(function(index){
 		$(this).find('.order_no').first().val(index);
-		$(this).find('.repositionValue').first().val(index);
+		$(this).find('.repositionValue').first().val(index); //이미지의 위치 재조정값 들고가기
 	});
 	
 	 

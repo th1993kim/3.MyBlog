@@ -24,9 +24,9 @@
 .footer-left{
 	display:inline-block;
 	width:550px;
-	color:white;
+	 color:white;
 	font-weight: 600;
-	font-size:1.2rem;
+	font-size:1rem;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -36,9 +36,11 @@
 <body>
 	<div class="footer-container"> 
 		<div class="footer-left">
+			<br/>
 			<span>E-mail : th1993kim@gmail.com</span> 
-			<br/>  
-			<span><img src="${contextPath}/resources/imgs/GithubIcon.png" style="width:30px;height:30px;" />GitHub : https://github.com/th1993kim/MyProject</span><br/>
+			<br/>   
+			<span><img src="${contextPath}/resources/imgs/GithubIcon.png" style="width:30px;height:30px;" />GitHub : https://github.com/th1993kim</span><br/>
+			<br/>
 			<span>Copyright ⓒ Tae Hyun Kim</span>
 		</div>
 	</div>

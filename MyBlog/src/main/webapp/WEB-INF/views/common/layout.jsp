@@ -14,9 +14,28 @@
        <put-attribute name="title"	value="~~~~" />을 적용하는 부분  --%>
 <title><tiles:insertAttribute name="title" /></title>
 <style>
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+#outer_wrap{
+	height:100%; 
+}
+#wrap{
+	position:relative;
+	min-height:100%;
+} 
 #wrap>article{
 	width:1180px;
-	margin:0 auto;
+	margin:0 auto;  
+	padding-bottom:250px;   
+}
+#wrap>footer{
+	position:absolute;
+    bottom:0;
+    width:100%;
 }
 </style>
 </head>
