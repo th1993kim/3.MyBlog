@@ -19,6 +19,8 @@
 <title>Insert title here</title>
 <style>
 .studyDetail-container{
+	width:1180px;
+	margin: 0 auto;
 }
 .detailTable pre{
 	margin:0;
@@ -48,14 +50,14 @@
 <body>
 	<div class="studyDetail-container">
 		<table class="detailTable table"> 
-			<thead class="thead-dark">
+			<thead> 
 				<tr class="font-weight-bold">
-					<th>작성일</th><td><fmt:formatDate type="date" pattern="yyyy년 MM월 dd일" value="${study.study_date}" ></fmt:formatDate></td>
-					<th>작성자</th><td>${study.member_id}</td> 
+					<td>작성일</td><td><fmt:formatDate type="date" pattern="yyyy년 MM월 dd일" value="${study.study_date}" ></fmt:formatDate></td>
+					<td>작성자</td><td>${study.member_id}</td> 
 				</tr>
 				<tr class="font-weight-bold"> 
-					<th>글 제목</th><td colspan="3">${study.study_title}</td>
-				</tr>
+					<td>글 제목</td><td colspan="3">${study.study_title}</td>
+				</tr> 
 			</thead>
 			<tr> 
 				<td class="textCenter" colspan="4">

@@ -13,6 +13,7 @@
 <style>
 .studyWrite-container{
 	margin:0 auto;
+	width:1180px;
 }
 .study_title{ 
 	width:90%;
@@ -49,6 +50,7 @@
 	border:0px;
 	height:20px;
 }
+/*버튼 위치 css */
 .buttonsPosition{
 	display:inline-block;
 	width:35px; 
@@ -96,7 +98,6 @@
 	top:0px;
 	opacity:0;
 	cursor:pointer;
-	 
 	filter: alpha(opacity=0);
 	-ms-filter:"alpha(opacity=0)";
 	-khtml-opacity:0;
@@ -342,7 +343,7 @@ $(function(){
 	<div class="studyWrite-container">
 		<form id="writeForm" method="post" action="${contextPath}/study/studyModify" enctype="multipart/form-data">
 			<table width="1180px" id="studyTable" class="table lineremove">
-				<tr class="backGround">
+				<tr> 
 					<td>제목</td><td><input type="text" name="study_title" class="study_title" value="${study.study_title}"></td>
 				</tr> 
 				<c:set var="listSize" value="${max_order_length}" />

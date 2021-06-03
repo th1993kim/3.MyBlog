@@ -28,8 +28,7 @@ body{
 	min-height:100%;
 } 
 #wrap>article{
-	width:1180px;
-	margin:0 auto;  
+	margin:250px auto 0 auto;   
 	padding-bottom:250px;   
 }
 #wrap>footer{
@@ -39,7 +38,7 @@ body{
 }
 </style>
 </head>
-<body>
+<body> 
 <div id="outer_wrap">
 		<div id="wrap">
 			<header>

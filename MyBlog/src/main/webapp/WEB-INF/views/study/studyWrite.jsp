@@ -12,6 +12,7 @@
 <style>
 .studyWrite-container{
 	margin:0 auto;
+	width:1180px;
 }
 .study_title{ 
 	width:90%;
@@ -123,7 +124,7 @@
 	<div class="studyWrite-container">
 		<form id="writeForm" method="post" action="${contextPath}/study/studyWrite" enctype="multipart/form-data">
 			<table width="1180px" id="studyTable" class="table lineremove"> 
-				<tr class="backGround">
+				<tr>
 					<td>제목</td><td><input type="text" name="study_title" class="study_title"></td>
 				</tr> 
 				<tr class="numChecking">

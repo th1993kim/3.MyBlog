@@ -12,6 +12,11 @@
 <html>
 <head>
 <style>
+/* div 크기 */
+.studyList-container{
+	width:1180px;
+	margin: 0 auto;
+}
 /* 글쓰기 위치 */
 .studyWrite{
 	float:right;
@@ -36,19 +41,27 @@
 .listTable a:hover{ 
 	color:skyblue;
 }
+
+/* 폰트 */
+.listTable th{
+	font-family: "Open Sans", sans-serif;
+}
+
+
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="studyWrite"> 
-		<input type="button" value="글쓰기" class="inputBtn btn btn-outline-secondary" onClick="location.href='${contextPath}/study/studyWriteForm?so_no=${search.so_no}&dae_no=${search.dae_no}'" />
-	</div>
 	<div class="studyList-container">
+		<div class="studyWrite"> 
+			<input type="button" value="글쓰기" class="inputBtn btn btn-outline-secondary" onClick="location.href='${contextPath}/study/studyWriteForm?so_no=${search.so_no}&dae_no=${search.dae_no}'" />
+		</div>
 		<form id="studyDelete" action="/study/delete" method="get">
-			<table class="listTable table">
-				<thead class="thead-dark">
+			<table class="listTable table table-hover">
+				<thead> 
 					<tr>
 						<th><input type="checkBox" class="checkAll"></th>
 						<th>글번호</th>

@@ -20,13 +20,21 @@
 	height:150px;   
 	background-color:#5B6882;
 	text-align:center;
+	font-family: "Montserrat", sans-serif;
 }
 .footer-left{
 	display:inline-block;
 	width:550px;
 	 color:white;
-	font-weight: 600;
+	font-weight: 500;
 	font-size:1rem;
+}
+.footer-left a{
+	text-decoration: none;
+	color:white;
+}
+.footer-left a:hover{
+	color:skyblue;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -36,13 +44,16 @@
 <body>
 	<div class="footer-container"> 
 		<div class="footer-left">
-			<br/>
-			<span>E-mail : th1993kim@gmail.com</span> 
+			<br/> 
+			<span>P-Call : 010-5536-5570</span> 
 			<br/>   
-			<span><img src="${contextPath}/resources/imgs/GithubIcon.png" style="width:30px;height:30px;" />GitHub : https://github.com/th1993kim</span><br/>
+			<span>E-mail : th1993kim@gmail.com</span>  
+			<br/>    
+			<span><img src="${contextPath}/resources/imgs/GithubIcon.png" style="width:30px;height:30px;" />GitHub :&nbsp; <a href="https://github.com/th1993kim">Link</a> </span>
 			<br/>
 			<span>Copyright ⓒ Tae Hyun Kim</span>
 		</div>
 	</div>
-</body>
+</body> 
+<script src="${contextPath}/resources/js/main.js"></script>
 </html>

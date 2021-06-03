@@ -15,22 +15,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/timeline.css" />
+<meta charset="UTF-8">
 <style>
-.study h2{
-	margin-left:150px;
-} 
-.studyItem{
-	display:flex;
-	flex-flow:row wrap; 
-	justify-content: center;
-}
-.studyItem>table{
-	width:400px; 
-	margin:20px 30px; 
-}
-.table th,td{ 
-	padding:6px 10px !important; 
+.row{
+	justify-content: center !important;
 }
 .project h2{
 	margin-left:150px;
@@ -46,87 +35,185 @@
 	border-radius: 10px;
 }
 </style>
-<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="main-container">
-		<div class="study">
-			<h2>STUDY</h2>
-			<div class="studyItem">
-				<table class="table table-bordered">
-					<tr><th>JAVA</th></tr>
-					<c:forEach items="${JAVAList}" var="java" >
-						<tr>
-							<td><a href="${contextPath}/study/studyDetail?study_no=${java.study_no}">${java.study_title}</a></td>
-						</tr>
-					</c:forEach>
-					<c:if test="${fn:length(JAVAList)<5}">
-						<c:forEach begin="0" end="${4-fn:length(JAVAList)}" step="1">
-							<tr><td>작성한글이 없습니다.</td></tr>  
+ <!-- ======= Hero Section ======= -->
+  <section id="hero" class="clearfix">
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center align-self-center" data-aos="fade-up">
+        <div class="col-md-6 intro-info order-md-first order-last" data-aos="zoom-in" data-aos-delay="100">
+          <h2>THWEB에 오신것을 <br><span>환영합니다.</span></h2>
+          <div>
+            <a href="#about" class="btn-get-started scrollto">About me</a>
+          </div> 
+        </div>
+
+        <div class="col-md-6 intro-img order-md-last order-first" data-aos="zoom-out" data-aos-delay="200">
+          <img src="${contextPath}/resources/img/intro-img.jpg" alt="" class="img-fluid">
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+
+          <div class="col-lg-5 col-md-6">
+            <div class="about-img" data-aos="fade-right" data-aos-delay="100">
+              <img src="${contextPath}/resources/img/about-img.jpg" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-7 col-md-6">
+            <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+              <h2>About me</h2> 
+              <h3>끊임없이 나를 개발하는 개발자</h3>
+              <p>안녕하세요. 주니어 개발자 김태현입니다.</p>
+              <p></p>
+              <ul>
+                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+                <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h3>My Skills</h3>
+        </header> 
+  
+	       <div class="row">
+	
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/java.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">Java</a></h4> 
+	            </div>
+	          </div>
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/javascript.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">JavaScript</a></h4> 
+	            </div>
+	          </div>
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/spring.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">SPRING</a></h4> 
+	            </div>
+	          </div>
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/mybatis.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">MyBatis</a></h4> 
+	            </div>
+	          </div>
+
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/oracle.svg" style="width:120px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">Oracle</a></h4>   
+	            </div>
+	          </div>
+	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/mysql.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">MySQL</a></h4> 
+	            </div>
+	          </div> 
+   	          <div class="col-md-6 col-lg-4 wow bounceInUp" data-aos="zoom-in" data-aos-delay="100">
+	            <div class="box"> 
+	              <div class="logoIcon"><img src="${contextPath}/resources/img/skills/gibhub.png" style="width:70px;height:70px; margin:0 0 20px 0" /></div>
+	              <h4 class="title"><a href="#">GitHub</a></h4> 
+	            </div>
+	          </div> 
+	      </div>
+
+      </div> 
+    </section><!-- End Services Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container-fluid" data-aos="fade-up">
+
+        <header class="section-header">
+          <h3>My History</h3>
+        </header>
+        <div class="row">
+			<ul class="timeline" id="timeline">
+			  <li class="li complete">
+			    <div class="timestamp">
+			      <span class="date">~ 2018/08</span>
+			    </div>
+			    <div class="status">
+			      <h4> 단국대학교 산업공학과 졸업</h4>
+			    </div>
+			  </li>
+			  <li class="li complete">
+			    <div class="timestamp">
+			      <span class="date">2018/03 ~ 2020/10</span>
+			    </div> 
+			    <div class="status">
+			      <h4> GSE엘리베이터 근무</h4>
+			    </div>
+			  </li>
+			  <li class="li complete">
+			    <div class="timestamp">
+			      <span class="date">2020/11~2021/05</span>
+			    </div>
+			    <div class="status">
+			      <h4> 경영기술개발원 교육수료</h4>
+			    </div>
+			  </li>
+			 </ul>
+       		</div>
+     	</div>
+    </section><!-- End Why Us Section -->
+<!-- ======= Clients Section ======= -->
+	<section id="PROJECT" >
+    <section id="clients" class="clients section-bg">
+      <div class="container" data-aos="zoom-in">
+        <header class="section-header">
+          <h3>My Project</h3>
+        </header>
+	 		<div class="project">	
+				<div class="project-list">
+					<div class="card deck">
+						<c:forEach items="${projectList}" var="project" >
+					    	<div class="card">
+								<a href="${contextPath}/study/studyDetail?study_no=${project.study_no}"><img src="${contextPath}/thumbnail?study_no=${project.study_no}" class="card-img-top" /></a>
+								<div class="card-body">
+									<h5 class="card-title"><a href="${contextPath}/study/studyDetail?study_no=${project.study_no}">${project.study_title}</a></h5>
+								</div>
+								<div class="card-footer"> 
+									<small class="text-muted"><fmt:formatDate type="date" pattern="yyyy년 MM월 dd일" value="${project.study_date}" ></fmt:formatDate></small>
+								</div>
+							</div> 
 						</c:forEach>
-					</c:if>
-				</table>
-				<table class="table table-bordered">
-					<tr><th>SPRING</th></tr>
-					<c:forEach items="${SPRINGList}" var="spring" >
-						<tr>
-							<td><a href="${contextPath}/study/studyDetail?study_no=${spring.study_no}">${spring.study_title}</a></td>
-						</tr>
-					</c:forEach>
-					<c:if test="${fn:length(SPRINGList)<5}">
-						<c:forEach begin="0" end="${4-fn:length(SPRINGList)}" step="1">
-							<tr><td>작성한글이 없습니다.</td></tr> 
-						</c:forEach>
-					</c:if>
-				</table>
-				<table class="table table-bordered">
-					<tr><th>ORACLE</th></tr>
-					<c:forEach items="${ORACLEList}" var="oracle" >
-						<tr>
-							<td><a href="${contextPath}/study/studyDetail?study_no=${oracle.study_no}">${oracle.study_title}</a></td>
-						</tr>
-					</c:forEach>
-					<c:if test="${fn:length(ORACLEList)<5}">
-						<c:forEach begin="0" end="${4-fn:length(ORACLEList)}" step="1">
-							<tr><td>작성한글이 없습니다.</td></tr> 
-						</c:forEach>
-					</c:if>		
-				</table>
-				<table class="table table-bordered">
-					<tr><th>CSS</th></tr>
-					<c:forEach items="${CSSList}" var="css" >
-						<tr>
-							<td><a href="${contextPath}/study/studyDetail?study_no=${css.study_no}">${css.study_title}</a></td>
-						</tr>
-					</c:forEach>
-					<c:if test="${fn:length(CSSList)<5}">
-						<c:forEach begin="0" end="${4-fn:length(CSSList)}" step="1">
-							<tr><td>작성한글이 없습니다.</td></tr> 
-						</c:forEach>
-					</c:if>				
-				</table>
-			</div>
-		</div>
-		
-		<div class="project">	
-			<h2>PROJECT</h2>
-			<div class="project-list">
-				<div class="card deck">
-					<c:forEach items="${projectList}" var="project" >
-				    	<div class="card">
-							<a href="${contextPath}/study/studyDetail?study_no=${project.study_no}"><img src="${contextPath}/thumbnail?study_no=${project.study_no}" class="card-img-top" /></a>
-							<div class="card-body">
-								<h5 class="card-title"><a href="${contextPath}/study/studyDetail?study_no=${project.study_no}">${project.study_title}</a></h5>
-							</div>
-							<div class="card-footer"> 
-								<small class="text-muted"><fmt:formatDate type="date" pattern="yyyy년 MM월 dd일" value="${project.study_date}" ></fmt:formatDate></small>
-							</div>
-						</div> 
-					</c:forEach>
+					</div>
 				</div>
 			</div>
-		</div>	
-	</div>
+        </div>
+    </section>
+    </section>
+    <!-- End Clients Section -->
+  </main><!-- End #main -->
 </body>
+  <!-- Template Main JS File -->
+  <script src="${contextPath}/resources/js/main.js"></script>
 </html>
