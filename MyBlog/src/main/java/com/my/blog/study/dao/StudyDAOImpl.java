@@ -193,7 +193,8 @@ public class StudyDAOImpl implements StudyDAO {
 	//Dae_no로 So_no 가져오기
 	@Override
 	public int firstSoNum(int i) throws DataAccessException {
-		return sqlSession.selectOne("study.firstSoNum", i);
+		int firstSoNum = sqlSession.selectOne("study.firstSoNum", i);
+		return firstSoNum;
 	}
 
 	@Override
@@ -202,6 +203,18 @@ public class StudyDAOImpl implements StudyDAO {
 		total=sqlSession.selectOne("study.totalNum", searchDTO);
 		PageDTO studyPage = new PageDTO(searchDTO.getCurrentPage(),total,searchDTO.getSeeCount());
 		return studyPage;
+	}
+	
+	@Override
+	public int simgMinOrder(int study_no) throws DataAccessException {
+		return sqlSession.selectOne("study.simgMinOrder",study_no);
+	}
+
+	@Override
+	public SimgDTO simgThumb(Map<String, Integer> noMap) throws DataAccessException {
+		SimgDTO simg=null;  
+		simg=(SimgDTO)sqlSession.selectOne("study.simgThumbnail",noMap); 
+		return simg; 
 	}
 	
 

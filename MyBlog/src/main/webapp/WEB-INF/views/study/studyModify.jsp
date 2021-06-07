@@ -7,6 +7,7 @@
 <%-- contextPath를 변수명이 contextPath에 담는 jstl의 core 부분 --%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value ="${pageContext.request.contextPath}"  />
+<% pageContext.setAttribute("replaceChar","\n"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,17 +147,18 @@ function reposition(){
 
 
 $(function(){ 
+	
 	$('.scontent_color').each(function(){
 		var color=$(this).val();
-		$(this).nextAll("textarea").first().css('color',color);
+		$(this).parents("div").first().nextAll("textarea").css('color',color);
 	});
 	$('.scontent_size').each(function(){
 		var size=$(this).val();
-		$(this).nextAll("textarea").first().css('font-size',size);
+		$(this).parents("div").first().nextAll("textarea").css('font-size',size);
 	});
 	$('.scontent_weight').each(function(){
 		var weight=$(this).val();
-		$(this).nextAll("textarea").first().css('font-weight',weight);
+		$(this).parents("div").first().nextAll("textarea").css('font-weight',weight);
 	});
 	
 	
@@ -357,7 +359,7 @@ $(function(){
 										<span class="nameTag">폰트 크기 : </span><input type="text" name="scontentList[${contentNo.index}].scontent_size" value="${scontent.scontent_size}" class="textCss scontent_size" />
 										<span class="nameTag">폰트 굵기 : </span><input type="text" name="scontentList[${contentNo.index}].scontent_weight" value="${scontent.scontent_weight}"  class="textCss scontent_weight" />
 									</div>
-									<textarea  name="scontentList[${contentNo.index}].scontent_content" class="scontent_content">${scontent.scontent_content}</textarea>
+									<textarea  name="scontentList[${contentNo.index}].scontent_content" class="scontent_content" wrap="hard">${scontent.scontent_content}</textarea>
 									<div class="buttonsPosition">
 										<input type="button" value="▲" class="positionUp btn btn-secondary btn-sm" >
 										<input type="button" value="▼" class="positionDn btn btn-secondary btn-sm">

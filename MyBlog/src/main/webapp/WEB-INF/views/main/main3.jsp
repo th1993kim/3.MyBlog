@@ -37,7 +37,7 @@
 }
 .project-list{
 	display:flex;
-	padding:15px 150px; 
+	padding:15px 50px; 
 	justify-content: center;
 	flex-flow:row wrap;
 }
@@ -112,7 +112,7 @@
 		<div class="project">	
 			<h2>PROJECT</h2>
 			<div class="project-list">
-				<div class="card deck">
+				<div class="card-deck">    
 					<c:forEach items="${projectList}" var="project" >
 				    	<div class="card">
 							<a href="${contextPath}/study/studyDetail?study_no=${project.study_no}"><img src="${contextPath}/thumbnail?study_no=${project.study_no}" class="card-img-top" /></a>

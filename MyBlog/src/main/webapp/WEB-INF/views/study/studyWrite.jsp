@@ -134,7 +134,7 @@
 							<span class="nameTag">폰트 크기 : </span><input type="text" name="scontentList[0].scontent_size" value="1.2rem" class="textCss scontent_size" />
 							<span class="nameTag">폰트 굵기 : </span><input type="text" name="scontentList[0].scontent_weight" value="500"  class="textCss scontent_weight" />
 						</div>
-						<textarea  name="scontentList[0].scontent_content" class="scontent_content"></textarea>
+						<textarea  name="scontentList[0].scontent_content" class="scontent_content" wrap="hard"></textarea>
 						<input type="hidden" name="scontentList[0].scontent_order_no" class="order_no scontent_order_no" value="0" />
 					</td>
 				</tr>

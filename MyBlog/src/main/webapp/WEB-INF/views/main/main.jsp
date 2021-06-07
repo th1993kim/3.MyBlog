@@ -25,8 +25,8 @@
 	margin-left:150px;
 }
 .project-list{
-	display:flex;
-	padding:15px 150px; 
+	display:flex; 
+	padding:15px 50px;  
 	justify-content: center;
 	flex-flow:row wrap;
 }
@@ -68,20 +68,17 @@
           <div class="col-lg-5 col-md-6">
             <div class="about-img" data-aos="fade-right" data-aos-delay="100">
               <img src="${contextPath}/resources/img/about-img.jpg" alt="">
-            </div>
+            </div> 
           </div>
 
           <div class="col-lg-7 col-md-6">
             <div class="about-content" data-aos="fade-left" data-aos-delay="100">
               <h2>About me</h2> 
-              <h3>끊임없이 나를 개발하는 개발자</h3>
-              <p>안녕하세요. 주니어 개발자 김태현입니다.</p>
-              <p></p>
-              <ul>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                <li><i class="ion-android-checkmark-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-              </ul>
+              <h3>"끊임없이 나를 개발하는 개발자"</h3>
+              <p>안녕하세요. 주니어 백엔드 개발자 김태현입니다.</p>
+              <p>저는 항상 사용자의 입장에서 설계하는 개발자이며, 사용자가 범할 수 있는 오류들에 대해 항상 생각합니다.</p>
+              <p>팀과의 의사소통을 중요시하며, 동료와의 교류를 통해 서로 발전할 수 있다고 생각하며 개발하고 있습니다.</p>
+              <p>새로운 기술을 추구하며, 레거시 코드를 답습해봅니다. 레거시 코드를 알아야 새로운 기술의 이용이 편리하다고 생각합니다.</p>
             </div>
           </div>
         </div>
@@ -193,7 +190,7 @@
         </header>
 	 		<div class="project">	
 				<div class="project-list">
-					<div class="card deck">
+					<div class="card-deck">
 						<c:forEach items="${projectList}" var="project" >
 					    	<div class="card">
 								<a href="${contextPath}/study/studyDetail?study_no=${project.study_no}"><img src="${contextPath}/thumbnail?study_no=${project.study_no}" class="card-img-top" /></a>

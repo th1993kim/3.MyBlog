@@ -8,7 +8,7 @@
 <c:set var="contextPath" value ="${pageContext.request.contextPath}"  />
 
 <%-- category DB가져옴  --%>
-<tiles:importAttribute name="soList" />
+<tiles:importAttribute name="soList" /> 
 <tiles:importAttribute name="daeList" />
 
 <!DOCTYPE html>
@@ -86,7 +86,7 @@
 	      </nav><!-- .main-nav-->
 	    </div>
 	 </header>
-</body>
+</body> 
   <!-- Vendor JS Files -->
   <script src="${contextPath}/resources/vendor/jquery/jquery.min.js"></script>
   <script src="${contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

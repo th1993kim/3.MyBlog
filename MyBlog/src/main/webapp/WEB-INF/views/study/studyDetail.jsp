@@ -65,8 +65,8 @@
 					<c:forEach var ="i" begin="0" end="${listSize}" step="1">
 						<c:forEach var="scontent" items="${scontentList}">
 							<c:if test="${scontent.scontent_order_no==i}" >
-									<pre style="color:${scontent.scontent_color};font-size:${scontent.scontent_size};font-weight:${scontent.scontent_weight};">${scontent.scontent_content}</pre>
-							</c:if>
+									<pre style="color:${scontent.scontent_color};font-size:${scontent.scontent_size};font-weight:${scontent.scontent_weight};">${fn:replace(scontent.scontent_content,replaceChar,"<br/>")}</pre>
+							</c:if> 
 						 </c:forEach>
 						 <c:forEach var="simg" items="${simgList}">
 						 	<c:if test="${simg.simg_order_no==i}">

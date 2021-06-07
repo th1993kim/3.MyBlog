@@ -1,6 +1,7 @@
 package com.my.blog.study.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,4 +29,6 @@ public interface StudyDAO {
 			List<MultipartFile> files, int study_no) throws DataAccessException;
 	public int firstSoNum(int i) throws DataAccessException;
 	public PageDTO getStudyPage(SearchDTO searchDTO) throws DataAccessException;
+	public SimgDTO simgThumb(Map<String, Integer> noMap) throws DataAccessException;
+	public int simgMinOrder(int study_no) throws DataAccessException;
 }

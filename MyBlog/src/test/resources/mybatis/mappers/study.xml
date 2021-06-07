@@ -82,13 +82,24 @@
 		
 		<!-- simgList가져오기 -->
 		<select id="simgListSelect" resultType="simgDTO" parameterType="int">
+			SELECT * 
+			FROM(SELECT *
+			FROM simg 
+			WHERE study_no=#{study_no}
+			ORDER BY SIMG_ORDER_NO)			
+		</select> 
+		<select id="simgMinOrder" resultType="int" parameterType="int">
+		 	SELECT MIN(simg_order_no) simg_order_no FROM simg WHERE study_no=#{study_no}
+	 	</select>  
+		<!-- simg 썸네일용 DB 가져오기 -->
+		<select id="simgThumbnail" resultType="simgDTO" parameterType="map">
 			SELECT *
 			FROM simg
-			WHERE study_no=#{study_no}			
-		</select>
-		
+			WHERE study_no=#{study_no} and simg_order_no = ${min_order_no}		
+		</select> 
+		 
 		<!-- scontent 순서 max값 가져오기 -->
-		<select id="scontentMaxOrder" resultType="int" parameterType="int">
+		<select id="scontentMaxOrder" resultType="int" parameterType="map">
 			SELECT max(scontent_order_no)
 			FROM scontent
 			WHERE study_no=#{study_no}

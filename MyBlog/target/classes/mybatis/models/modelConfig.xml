@@ -1,14 +1,13 @@
 <!DOCTYPE configuration    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-config.dtd">
-
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.myportfolio.mypage.member.dto.MemberDTO" alias="memberDTO"/>
-		<typeAlias type="com.myportfolio.mypage.common.dto.SearchDTO" alias="searchDTO"/>
-		<typeAlias type="com.myportfolio.mypage.common.dto.SoDTO" alias="soDTO"/>
-		<typeAlias type="com.myportfolio.mypage.common.dto.DaeDTO" alias="daeDTO"/>
-		<typeAlias type="com.myportfolio.mypage.study.dto.StudyDTO" alias="studyDTO"/>
-		<typeAlias type="com.myportfolio.mypage.study.dto.SimgDTO" alias="simgDTO"/>
-		<typeAlias type="com.myportfolio.mypage.study.dto.ScontentDTO" alias="scontentDTO"/>
+		<typeAlias type="com.my.blog.member.dto.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.my.blog.common.dto.SearchDTO" alias="searchDTO"/>
+		<typeAlias type="com.my.blog.common.dto.SoDTO" alias="soDTO"/>
+		<typeAlias type="com.my.blog.common.dto.DaeDTO" alias="daeDTO"/>
+		<typeAlias type="com.my.blog.study.dto.StudyDTO" alias="studyDTO"/>
+		<typeAlias type="com.my.blog.study.dto.SimgDTO" alias="simgDTO"/>
+		<typeAlias type="com.my.blog.study.dto.ScontentDTO" alias="scontentDTO"/>
 	</typeAliases>
 </configuration>   

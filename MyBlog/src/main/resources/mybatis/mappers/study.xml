@@ -87,6 +87,17 @@
 			WHERE study_no=#{study_no}			
 		</select>
 		
+		<!-- simg Min 값 가져오기 -->
+		<select id="simgMinOrder" resultType="int" parameterType="int">
+			SELECT nvl(min(simg_order_no),0)
+			FROM simg
+			WHERE study_no=#{study_no}
+		</select>
+		<select id="simgThumbnail" resultType="simgDTO" parameterType="map">
+			SELECT * 
+			FROM simg
+			WHERE study_no=#{study_no} and simg_order_no = #{min_order_no}
+		</select>
 		<!-- scontent 순서 max값 가져오기 -->
 		<select id="scontentMaxOrder" resultType="int" parameterType="int">
 			SELECT max(scontent_order_no)
@@ -142,7 +153,7 @@
 		
 		<!--  -->
 		<select id="firstSoNum" resultType="int" parameterType="int">
-			SELECT so_no
+			SELECT nvl(so_no,0) 
 			FROM so
 			WHERE dae_no=#{dae_no} and rownum=1
 		</select>

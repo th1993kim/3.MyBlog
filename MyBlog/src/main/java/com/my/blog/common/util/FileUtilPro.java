@@ -3,7 +3,8 @@ package com.my.blog.common.util;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.OutputStream;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -76,12 +77,15 @@ public class FileUtilPro {
 	
 	//실제 이미지의 경로를 가져와주는 메서드
 	private String getFirstFileRealPath(int study_no) {
-		List<SimgDTO> simgList = null;
-		simgList = studyDAO.simgListSelect(study_no);
-		
+		SimgDTO simg = null;
+		int min_order_no = 0;
+		min_order_no=	studyDAO.simgMinOrder(study_no);
+		Map<String,Integer> noMap = new HashMap<String,Integer>();
+		noMap.put("study_no",study_no);
+		noMap.put("min_order_no",min_order_no);
+		simg = studyDAO.simgThumb(noMap);
 		String realPath="";
-		if(simgList!=null) {
-			SimgDTO simg = simgList.get(0);
+		if(simg!=null) {
 			String dbPath = simg.getSimg_name();
 			String[] dbPathSplit = dbPath.split("/"); //split에 뒤에 인자에 -1넣으면 공백도 인식
 			realPath =RealPath +"\\"+dbPathSplit[2]+"\\"+dbPathSplit[3];

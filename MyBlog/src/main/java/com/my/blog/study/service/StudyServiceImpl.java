@@ -36,8 +36,10 @@ public class StudyServiceImpl implements StudyService {
 			List<MultipartFile> files) throws Exception {
 			int result =0;
 			result =studyDAO.studyWrite(studyDTO);
-			studyDAO.scontentWrite(scontentList);
-			studyDAO.simgWrite(simgList,files);
+			if(result>0) {
+				studyDAO.scontentWrite(scontentList);
+				studyDAO.simgWrite(simgList,files);
+			}
 		return result;
 	}
 
