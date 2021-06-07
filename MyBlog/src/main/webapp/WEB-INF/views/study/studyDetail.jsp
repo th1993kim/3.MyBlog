@@ -26,10 +26,12 @@
 	margin:0;
 }
 .textCenter{
-	text-align:center; 
 }
 .buttonAlign{ 
 	text-align:center;
+}
+pre{ 
+	font-family: 'Open Sans';
 }
 </style>
 <script>
@@ -41,14 +43,14 @@
 	$(function(){
 		//버튼클릭시 이전페이지 가기
 		$('#beforPageButton').click(function(){
-			goBack();				
+			goBack();		 		
 		});
 	});
 	
 </script>
 </head>
-<body>
-	<div class="studyDetail-container">
+<body> 
+	<div class="studyDetail-container" data-aos="fade-up">
 		<table class="detailTable table"> 
 			<thead> 
 				<tr class="font-weight-bold">
@@ -65,8 +67,8 @@
 					<c:forEach var ="i" begin="0" end="${listSize}" step="1">
 						<c:forEach var="scontent" items="${scontentList}">
 							<c:if test="${scontent.scontent_order_no==i}" >
-									<pre style="color:${scontent.scontent_color};font-size:${scontent.scontent_size};font-weight:${scontent.scontent_weight};">${fn:replace(scontent.scontent_content,replaceChar,"<br/>")}</pre>
-							</c:if> 
+									<pre style="color:${scontent.scontent_color};font-size:${scontent.scontent_size};font-weight:${scontent.scontent_weight};">${scontent.scontent_content}</pre>
+							</c:if>  
 						 </c:forEach>
 						 <c:forEach var="simg" items="${simgList}">
 						 	<c:if test="${simg.simg_order_no==i}">
@@ -78,8 +80,8 @@
 			</tr>  
 		</table> 
 		<div class="buttonAlign">
-			<input type="button" id="beforPageButton" class="btn btn-outline-secondary" value="이전 페이지">
-			<input type="button" id="studyModify" class="btn btn-outline-warning" value="수정하기" onClick="location.href='${contextPath}/study/studyModifyForm?study_no=${study.study_no}'">
+			<input type="button" id="beforPageButton" class="btn btn-outline-secondary" value="이전 페이지"> 
+			<c:if test="${!empty loginMember}"><input type="button" id="studyModify" class="btn btn-outline-warning" value="수정하기" onClick="location.href='${contextPath}/study/studyModifyForm?study_no=${study.study_no}'"></c:if>
 		</div>
 	</div>
 </body>

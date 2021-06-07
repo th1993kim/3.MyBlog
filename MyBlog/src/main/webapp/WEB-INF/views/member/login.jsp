@@ -9,20 +9,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.login-container{
+	border:2px outset gray;
+	width: 500px;  
+	height:300px;
+	margin: 0 auto;
+	display:flex;
+	justify-content: center;
+	font-family: 'Open Sans';
+	align-items:center; 
+}
+.inText{
+	width:350px;
+	height:40px;
+	border:1px solid gray;
+	margin:5px;
+	border-radius: 5px;
+}
+.inButton{
+	width:350px;
+	height:45px;
+	font-weight:600;
+	font-size:25px;
+	margin:5px;
+	border-radius: 5px;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="login-container">
+	<div class="login-container" data-aos="fade-up">
 		<form id="loginForm" action="${contextPath}/member/login" method="post">
 			<div class="id-container">
-				ID : <input type="text" name="member_id" class="inText id" placeholder="아이디를 입력하세요" />
+			  <input type="text" name="member_id" class="inText id" placeholder="아이디를 입력하세요" />
 			</div>
 			<div class="pwd-container">
-				PWD :<input type="text" name="member_pwd" class="inText pwd" placeholder="비밀번호를 입력하세요" />
+				<input type="text" name="member_pwd" class="inText pwd" placeholder="비밀번호를 입력하세요" />
 			</div>
 			<div class="login-button">
-				<input type="submit" value="로그인" name="login" class=""/>			
+				<input type="submit" value="Login" name="login" class="inButton btn-primary"/>			
 			</div>
 		</form>
 	</div>

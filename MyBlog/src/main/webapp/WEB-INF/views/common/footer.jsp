@@ -20,7 +20,7 @@
 	height:150px;   
 	background-color:#5B6882;
 	text-align:center;
-	font-family: "Montserrat", sans-serif;
+	font-family: 'Open Sans';
 }
 .footer-left{
 	display:inline-block;

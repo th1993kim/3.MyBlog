@@ -145,9 +145,9 @@
 			<input type="hidden" name="so_no" value="${search.so_no}" />
 			<input type="hidden" name="dae_no" value="${search.dae_no}" />
 			<div class="submitPosition">
-				<input type="submit" name="regist" class="inputBtn btn btn-primary"  value="확인" />
-				<input type="button" name="previous" class="inputBtn btn btn-primary" value="취소" />
-			</div>
+				<c:if test="${!empty loginMember}"><input type="submit" name="regist" class="inputBtn btn btn-primary"  value="확인" /></c:if>
+				<input type="button" name="previous" id="beforPageButton" class="inputBtn btn btn-primary" value="취소" />
+			</div> 
 		</form> 
 	</div> 
 
@@ -330,6 +330,11 @@
 			
 			*/
 		});
+	
+		$('#beforPageButton').click(function(){
+			goBack();
+		});
+	
 	});
 	/* 동적 처리시 parameter,name 재정렬 function */
 function reposition(){
@@ -355,7 +360,10 @@ function reposition(){
 	}); 
 		
 } 	 
-    
+//이전페이지 가기 함수	
+function goBack(){
+	window.history.back();
+}    
 </script>
 </body>
 </html>

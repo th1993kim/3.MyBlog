@@ -54,8 +54,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<div class="studyList-container">
+<body> 
+	<div class="studyList-container" data-aos="fade-up">
 		<div class="studyWrite"> 
 			<input type="button" value="글쓰기" class="inputBtn btn btn-outline-secondary" onClick="location.href='${contextPath}/study/studyWriteForm?so_no=${search.so_no}&dae_no=${search.dae_no}'" />
 		</div>
@@ -83,11 +83,11 @@
 					</tr>
 				</c:forEach>
 				</tbody>
-			</table>
-			<input type="submit"  value="삭제" id="deleteBtn" class="btn btn-outline-danger" />
+			</table> 
+			<c:if test="${!empty loginMember}"><input type="submit"  value="삭제" id="deleteBtn" class="btn btn-outline-danger" /></c:if>
 		</form>
 	</div>
-	<div class="searchPosition">
+	<div class="searchPosition" data-aos="fade-up">
 		<form action="${contextPath}/study/studyList"> 
 			<input type="hidden" name="so_no" value="${search.so_no}" />
 			<input type="hidden" name="dae_no" value="${search.dae_no}" />
@@ -95,8 +95,8 @@
 			<input type="text" placeholder="글제목을 입력하세요" name="search_title" />
 			<input type="submit" value="검색" class="btn btn-dark">
 		</form>
-	</div>
-	<div class="pagingPosition">
+	</div> 
+	<div class="pagingPosition" data-aos="fade-up">
 		<div class="btn-group">
 		 	<c:if test="${studyPage.total!=0}"> 
 		 		<!-- 페이징 처리 11페이지보다 클때 이전 누르면 10페이지 앞으로온다.(앞의 끝페이지) -->
