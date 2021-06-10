@@ -11,12 +11,12 @@ import com.my.blog.common.dto.SearchDTO;
 import com.my.blog.study.dto.ScontentDTO;
 import com.my.blog.study.dto.SimgDTO;
 import com.my.blog.study.dto.StudyDTO;
-
+ 
 public interface StudyDAO {
 	public List<StudyDTO> studyListSelect(SearchDTO searchDTO) throws DataAccessException;
 	public int studyWrite(StudyDTO studyDTO) throws DataAccessException;
-	public void scontentWrite(List<ScontentDTO> scontentList) throws DataAccessException;
-	public void simgWrite(List<SimgDTO> simgList, List<MultipartFile> files) throws DataAccessException;
+	public void scontentWrite(List<ScontentDTO> scontentList, int study_no) throws DataAccessException;
+	public void simgWrite(List<SimgDTO> simgList, List<MultipartFile> files, int study_no) throws DataAccessException;
 	public StudyDTO studySelect(int study_no) throws DataAccessException;
 	public List<ScontentDTO> scontentListSelect(int study_no) throws DataAccessException;
 	public List<SimgDTO> simgListSelect(int study_no) throws DataAccessException;
@@ -31,4 +31,5 @@ public interface StudyDAO {
 	public PageDTO getStudyPage(SearchDTO searchDTO) throws DataAccessException;
 	public SimgDTO simgThumb(Map<String, Integer> noMap) throws DataAccessException;
 	public int simgMinOrder(int study_no) throws DataAccessException;
+	public int selectNextVal() throws DataAccessException;
 }

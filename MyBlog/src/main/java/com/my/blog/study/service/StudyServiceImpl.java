@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.my.blog.common.dto.PageDTO;
@@ -14,6 +15,7 @@ import com.my.blog.study.dao.StudyDAO;
 import com.my.blog.study.dto.ScontentDTO;
 import com.my.blog.study.dto.SimgDTO;
 import com.my.blog.study.dto.StudyDTO;
+
 
 @Service
 public class StudyServiceImpl implements StudyService {
@@ -29,17 +31,18 @@ public class StudyServiceImpl implements StudyService {
 		List<StudyDTO> studyList = studyDAO.studyListSelect(searchDTO);
 		return studyList;
 	}
-
+ 
 	//study 테이블 작성
+	@Transactional
 	@Override
 	public int studyWrite(StudyDTO studyDTO, List<ScontentDTO> scontentList, List<SimgDTO> simgList,
 			List<MultipartFile> files) throws Exception {
 			int result =0;
+			int study_no = studyDAO.selectNextVal();
+			studyDTO.setStudy_no(study_no);
 			result =studyDAO.studyWrite(studyDTO);
-			if(result>0) {
-				studyDAO.scontentWrite(scontentList);
-				studyDAO.simgWrite(simgList,files);
-			}
+			studyDAO.scontentWrite(scontentList,study_no);
+			studyDAO.simgWrite(simgList,files,study_no);
 		return result;
 	}
 

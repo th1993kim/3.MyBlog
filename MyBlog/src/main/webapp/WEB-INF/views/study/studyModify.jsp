@@ -232,7 +232,7 @@ $(function(){
 				str+='<tr class="numChecking">';
 				str+='	<td colspan="3">';
 				str+='		<div class="imgCustom">';		
-				str+='			<span class="nameTag">이미지 너비 : </span><input type="text" name="" value="100%" class="textCss simg_width" />';
+				str+='			<span class="nameTag">이미지 너비 : </span><input type="text" name="" value="" class="textCss simg_width" />';
 				str+='			<span class="nameTag">이미지 높이 : </span><input type="text" name="" value="" class="textCss simg_height" />';
 				str+='      </div>';
 				str+='      <div class="file-input-css">';

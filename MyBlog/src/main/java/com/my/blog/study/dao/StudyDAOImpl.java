@@ -26,11 +26,20 @@ public class StudyDAOImpl implements StudyDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	
+	
+	
 	//study테이블 목록 조회
 	@Override
 	public List<StudyDTO> studyListSelect(SearchDTO searchDTO) throws DataAccessException {
 		List<StudyDTO> studyListSelect = sqlSession.selectList("study.studyListSelect",searchDTO);
 		return studyListSelect;
+	}
+	
+	//글 작성하기전 nextVal값 가져오기
+	@Override
+	public int selectNextVal() throws DataAccessException {
+		return sqlSession.selectOne("study.selectNextVal");
 	}
 	
 	//글작성하기-제목
@@ -41,16 +50,16 @@ public class StudyDAOImpl implements StudyDAO {
 
 	//글작성하기-내용
 	@Override
-	public void scontentWrite(List<ScontentDTO> scontentList) throws DataAccessException {
+	public void scontentWrite(List<ScontentDTO> scontentList,int study_no) throws DataAccessException {
 		for(ScontentDTO scontent :scontentList) {
+			scontent.setStudy_no(study_no);
 			sqlSession.insert("study.scontentWrite",scontent);
 		}
-	}
+	} 
 
 	//글작성하기-이미지
 	@Override
-	public void simgWrite(List<SimgDTO> simgList, List<MultipartFile> files) throws DataAccessException {
-		int study_no = (Integer)sqlSession.selectOne("study.study_no");
+	public void simgWrite(List<SimgDTO> simgList, List<MultipartFile> files,int study_no) throws DataAccessException {
 		String fileDirPath = RealPath+"\\"+study_no; //실제 저장 물리 경로 (study_no로 폴더 분류)
 		FileUtilPro.makeFolder(new File(fileDirPath)); //디렉토리 생성
 		studyImgUpload(study_no, files, simgList, fileDirPath); //파일 업로드
@@ -216,6 +225,8 @@ public class StudyDAOImpl implements StudyDAO {
 		simg=(SimgDTO)sqlSession.selectOne("study.simgThumbnail",noMap); 
 		return simg; 
 	}
+
+
 	
 
 }

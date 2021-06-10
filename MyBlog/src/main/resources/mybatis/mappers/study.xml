@@ -37,19 +37,20 @@
 			</where>
 		</select>
 		
+		<!-- 글입력전 nextVal가져오기  -->
+		<select id="selectNextVal" resultType="int">
+			SELECT seq_study.nextval
+			FROM dual
+		</select>
 		
 		<!-- study 의 제목 , 날짜 등 기본정보 입력  -->
 		<insert id="studyWrite" parameterType="studyDTO">
 			INSERT INTO study(study_no,study_title,member_id,study_date,study_delete,so_no,dae_no)
-			VALUES	(seq_study.nextval,#{study_title},#{member_id},sysdate,0,${so_no},${dae_no})
+			VALUES	(#{study_no},#{study_title},#{member_id},sysdate,0,${so_no},${dae_no})
 		</insert>
 		
 		<!-- contentList 입력  -->
 		<insert id="scontentWrite" parameterType="scontentDTO">
-			<selectKey keyProperty="study_no" resultType="int" order="BEFORE">
-				SELECT seq_study.currval 
-				FROM dual
-			</selectKey>
 			INSERT INTO scontent(scontent_no,scontent_content,scontent_color,scontent_size,scontent_weight,study_no,scontent_order_no)
 			VALUES(seq_scontent.nextval,#{scontent_content},#{scontent_color},#{scontent_size},#{scontent_weight},#{study_no},#{scontent_order_no})
 		</insert>
